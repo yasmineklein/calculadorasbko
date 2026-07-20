@@ -1,0 +1,485 @@
+/* 1. Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg: #003CA6;    
+    --secondary-bg: #0054A6; 
+    --accent-color: #00bfff;  
+    
+    --text-primary: rgba(255, 255, 255, 0.95);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.15);
+    
+    /* Novo Gradiente Azul */
+    --gradient-1: linear-gradient(-90deg, #001A33, #003CA6, #0054A6);
+
+    /* Typography */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    /* Spacing */
+    --container-padding: 2rem;
+    --section-padding: 5rem 0;
+    --border-radius: 1rem;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Base Styles */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background: #001A33; /* Fundo escuro azulado base */
+    min-height: 100%;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.7;
+    color: var(--text-primary);
+    background: var(--gradient-1);
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    animation: gradient 20s ease infinite;
+    -webkit-animation: gradient 20s ease infinite;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in;
+}
+
+/* 3. Animations */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* 4. Layout General */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* 5. Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #001A33; /* Azul bem escuro para o topo */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.nav.scrolled {
+    background: rgba(0, 26, 51, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    line-height: 1;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 0; 
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+/* 6. Hero Section */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 2rem;
+    position: relative;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 4rem;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+}
+
+.names-container {
+    min-height: 80px; 
+}
+
+.name {
+    font-family: var(--font-mono);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    display: block;
+    /* Brilho neon ajustado para o novo azul (RGB 0, 191, 255) */
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.4); 
+}
+
+.hero-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.hero-actions {
+    margin-top: 2rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-secondary:hover {
+    /* Fundo suave do botão no hover ajustado para azul */
+    background: rgba(0, 191, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.2);
+}
+
+/* Profile Images */
+.hero-image {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-img {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Borda e brilho ajustados */
+    border: 4px solid rgba(0, 191, 255, 0.2); 
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    transition: var(--transition-slow);
+    background: #000; 
+}
+
+.profile-img:hover {
+    transform: scale(1.02);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.profile-img-inner {
+    width: 100%;
+    height: 100%;
+    background-image: url("octopus.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Oculta a imagem de celular no Desktop */
+.profile-img-mobile {
+    display: none; 
+}    
+
+/* 7. Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-arrow {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+    transform: rotate(45deg);
+}
+
+@keyframes bounce {
+   0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(10px) rotate(45deg); }
+}
+
+section {
+    padding: var(--section-padding);
+}
+
+/* 8. Section Title */
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    text-align: center; 
+    position: relative;
+    width: 100%;        
+    display: block;
+    padding-bottom: 1.5rem;
+}
+
+/* Linha decorativa centralizada */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    /* Sombra do título ajustada */
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+/* 9. Project Section (Cards Grid) */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    /* Sombra do card ajustada */
+    box-shadow: 0 10px 20px rgba(0, 191, 255, 0.15);
+}
+
+.card h3 {
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.card .btn-secondary {
+    width: 100%;
+}
+
+/* 10. Footer */
+.footer {
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 11. Responsiveness */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+        position: absolute;
+        right: 2rem;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        /* Fundo do menu mobile escurecido combinando com o tema azul */
+        background: #001021; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+    
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-text {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-subtitle {
+        justify-content: center;
+    }
+
+    .hero-image {
+        display: none; 
+    }
+
+    .profile-img-mobile {
+        display: block;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin: 2rem auto;
+        /* Borda do mobile ajustada */
+        border: 3px solid rgba(0, 191, 255, 0.4);
+        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+        overflow: hidden;
+    }
+}
