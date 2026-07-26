@@ -138,8 +138,7 @@ a {
     line-height: 1;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links a:hover {
     color: var(--text-primary);
 }
 
@@ -156,8 +155,7 @@ a {
     transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
+.nav-links a:hover::after {
     width: 100%;
 }
 
