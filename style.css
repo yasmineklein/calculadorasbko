@@ -106,13 +106,15 @@ a {
     top: 0;
     left: 0;
     z-index: 1000;
+    transition: var(--transition);
 }
 
 .nav.scrolled {
     background: rgba(0, 26, 51, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 0.8rem 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-container {
