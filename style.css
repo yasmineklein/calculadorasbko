@@ -95,15 +95,17 @@ a {
 
 /* 5. Navigation */
 .nav {
-    position: fixed;
-    top: 0;
     width: 100%;
-    background: #001A33; /* Azul bem escuro para o topo */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    padding: 15px 20px;
+    position: fixed; 
+    top: 0;
+    left: 0;
     z-index: 1000;
-    height: 80px;
-    display: flex;
-    align-items: center;
 }
 
 .nav.scrolled {
