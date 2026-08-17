@@ -110,7 +110,7 @@ a {
 }
 
 .nav.scrolled {
-    background: rgba(0, 26, 51, 0.95);
+    background: transparent;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(12px);
     padding: 0.8rem 0;
