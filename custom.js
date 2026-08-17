@@ -21,12 +21,12 @@ class Navigation {
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             
-            // CORREÇÃO: Fundo da barra de navegação atualizado para Azul Escuro
             if (currentScroll > 100) {
                 this.nav.style.background = 'rgba(0, 26, 51, 0.98)';
                 this.nav.style.backdropFilter = 'blur(20px)';
             } else {
-                this.nav.style.background = 'rgba(0, 26, 51, 0.95)';
+                this.nav.style.background = 'transparent';
+                this.nav.style.backdropFilter = 'blur(10px)';
             }
             
             if (window.innerWidth <= 768) {
