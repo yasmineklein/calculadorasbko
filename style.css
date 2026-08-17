@@ -9,7 +9,8 @@
     --primary-bg: #003CA6;    
     --secondary-bg: #0054A6; 
     --accent-color: #00bfff;  
-    
+    --glow-rgb: 0, 191, 255; /* mesma cor do --accent-color, em formato rgb() para uso em rgba() */
+
     --text-primary: rgba(255, 255, 255, 0.95);
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-muted: rgba(255, 255, 255, 0.5);
@@ -119,9 +120,8 @@ a {
 }
 
 .nav.scrolled {
-    background: transparent;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(12px);
+    /* background e backdrop-filter (padrão) idênticos aos de .nav — removidos por serem redundantes */
+    -webkit-backdrop-filter: blur(10px);
     padding: 0.8rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -227,8 +227,8 @@ a {
     margin-bottom: 0.5rem;
     line-height: 1.1;
     display: block;
-    /* Brilho neon ajustado para o novo azul (RGB 0, 191, 255) */
-    text-shadow: 0 0 20px rgba(0, 191, 255, 0.4); 
+    /* Brilho neon ajustado para o novo azul */
+    text-shadow: 0 0 20px rgba(var(--glow-rgb), 0.4); 
 }
 
 .hero-subtitle {
@@ -265,10 +265,9 @@ a {
 }
 
 .btn-secondary:hover {
-    /* Fundo suave do botão no hover ajustado para azul */
-    background: rgba(0, 191, 255, 0.1);
+    background: rgba(var(--glow-rgb), 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(var(--glow-rgb), 0.2);
 }
 
 /* Profile Images */
@@ -284,8 +283,7 @@ a {
     height: 300px;
     border-radius: 50%;
     overflow: hidden;
-    /* Borda e brilho ajustados */
-    border: 4px solid rgba(0, 191, 255, 0.2); 
+    border: 4px solid rgba(var(--glow-rgb), 0.2); 
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     transition: var(--transition-slow);
     background: #000; 
@@ -352,7 +350,6 @@ section {
     padding-bottom: 1.5rem;
 }
 
-/* Linha decorativa centralizada */
 .section-title::after {
     content: '';
     position: absolute;
@@ -363,8 +360,7 @@ section {
     height: 3px;
     background: var(--accent-color);
     border-radius: 2px;
-    /* Sombra do título ajustada */
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+    box-shadow: 0 0 10px rgba(var(--glow-rgb), 0.4);
 }
 
 /* 9. Project Section (Cards Grid) */
@@ -389,8 +385,7 @@ section {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--accent-color);
-    /* Sombra do card ajustada */
-    box-shadow: 0 10px 20px rgba(0, 191, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(var(--glow-rgb), 0.15);
 }
 
 .card h3 {
@@ -439,7 +434,6 @@ section {
         height: 100vh;
         width: 70%;
         max-width: 300px;
-        /* Fundo do menu mobile escurecido combinando com o tema azul */
         background: #001021; 
         flex-direction: column;
         justify-content: center;
@@ -490,8 +484,7 @@ section {
         height: 180px;
         border-radius: 50%;
         margin: 2rem auto;
-        /* Borda do mobile ajustada */
-        border: 3px solid rgba(0, 191, 255, 0.4);
+        border: 3px solid rgba(var(--glow-rgb), 0.4);
         box-shadow: 0 0 30px rgba(0,0,0,0.4);
         overflow: hidden;
     }
