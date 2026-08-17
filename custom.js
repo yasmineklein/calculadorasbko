@@ -26,8 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 new Typed('#typed-subtitle', {
                     strings: [
-                        'Automação',
-                        'Facilitador', 
+                        'Automação', 
                         'Calculadoras'
                     ],
                     typeSpeed: 60,
