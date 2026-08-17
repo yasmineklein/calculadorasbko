@@ -1,49 +1,3 @@
-// Typewriter Effect
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        const titleElement = document.querySelector('#typed-title');
-        const subtitleElement = document.querySelector('#typed-subtitle');
-
-        if (titleElement) {
-            titleElement.textContent = '';
-            
-            new Typed('#typed-title', {
-                strings: ['BackOffice', 'BKO'],
-                typeSpeed: 100,
-                startDelay: 800,
-                backSpeed: 70,
-                backDelay: 3000,
-                loop: true,
-                showCursor: false,
-                fadeOut: false,
-                preStringTyped: function() {
-                    titleElement.style.minHeight = '1.2em';
-                }
-            });
-        }
-
-        if (subtitleElement) {
-            setTimeout(() => {
-                new Typed('#typed-subtitle', {
-                    strings: [
-                        'Automação', 
-                        'Calculadoras'
-                    ],
-                    typeSpeed: 60,
-                    backSpeed: 40,
-                    backDelay: 2000,
-                    startDelay: 500,
-                    loop: true,
-                    showCursor: false,
-                    fadeOut: false,
-                    contentType: 'html',
-                    smartBackspace: false
-                });
-            }, 2500); 
-        }
-    }, 100);
-});
-
 // Navigation & Smooth Scrolling
 class Navigation {
     constructor() {
@@ -225,13 +179,6 @@ class ParallaxEffect {
     }
 }
 
-// Custom Cursor Disabled
-class CursorEffect {
-    constructor() {
-        this.disabled = true;
-    }
-}
-
 // Performance Optimization
 class PerformanceOptimizer {
     constructor() {
@@ -267,20 +214,66 @@ class PerformanceOptimizer {
     }
 }
 
+// Referência única de Navigation, reutilizada pelo atalho de teclado (Escape)
+let navInstance;
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new Navigation();
+    // Typewriter Effect
+    setTimeout(() => {
+        const titleElement = document.querySelector('#typed-title');
+        const subtitleElement = document.querySelector('#typed-subtitle');
+
+        if (titleElement) {
+            titleElement.textContent = '';
+            
+            new Typed('#typed-title', {
+                strings: ['BackOffice', 'BKO'],
+                typeSpeed: 100,
+                startDelay: 800,
+                backSpeed: 70,
+                backDelay: 3000,
+                loop: true,
+                showCursor: false,
+                fadeOut: false,
+                preStringTyped: function() {
+                    titleElement.style.minHeight = '1.2em';
+                }
+            });
+        }
+
+        if (subtitleElement) {
+            setTimeout(() => {
+                new Typed('#typed-subtitle', {
+                    strings: [
+                        'Automação', 
+                        'Calculadoras'
+                    ],
+                    typeSpeed: 60,
+                    backSpeed: 40,
+                    backDelay: 2000,
+                    startDelay: 500,
+                    loop: true,
+                    showCursor: false,
+                    fadeOut: false,
+                    contentType: 'html',
+                    smartBackspace: false
+                });
+            }, 2500); 
+        }
+    }, 100);
+
+    // Componentes principais
+    navInstance = new Navigation();
     new AnimationOnScroll();
     new ParallaxEffect();
-    new CursorEffect();
     new PerformanceOptimizer();
 });
 
 // Add keyboard navigation support
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        const nav = new Navigation();
-        nav.closeMobileMenu();
+        navInstance?.closeMobileMenu();
     }
     
     if (e.altKey) {
@@ -294,17 +287,6 @@ document.addEventListener('keydown', (e) => {
             document.querySelector(`#${sections[currentIndex - 1]}`).scrollIntoView({ behavior: 'smooth' });
         }
     }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    document.body.style.background = '#001A33';
-    
-    setTimeout(() => {
-        document.body.style.background = 'linear-gradient(-90deg, #001A33, #003CA6, #0054A6)';
-        document.body.style.backgroundSize = '400% 400%';
-        document.body.style.animation = 'gradient 20s ease infinite';
-    }, 100);
 });
 
 // Add loading animation
