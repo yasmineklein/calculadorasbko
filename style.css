@@ -198,6 +198,7 @@ a {
     padding-top: 80px;
     padding-bottom: 2rem;
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .hero-content {
@@ -336,6 +337,7 @@ a {
 
 section {
     padding: var(--section-padding);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* 8. Section Title */
