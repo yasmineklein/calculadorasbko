@@ -1,4 +1,77 @@
-// Navigation & Smooth Scrolling
+// Theme Manager (Modo Claro/Escuro Avançado)
+class ThemeManager {
+    constructor() {
+        this.dropdown = document.querySelector('.theme-dropdown');
+        this.btn = document.getElementById('themeDropdownBtn');
+        this.options = document.querySelectorAll('.theme-option');
+        this.body = document.body;
+        this.init();
+    }
+
+    init() {
+        if (!this.dropdown) return;
+
+        
+        const savedTheme = localStorage.getItem('theme') || 'auto';
+        this.applyTheme(savedTheme);
+
+        this.btn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            this.dropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!this.dropdown.contains(e.target)) {
+                this.dropdown.classList.remove('active');
+            }
+        });
+
+        this.options.forEach(option => {
+            option.addEventListener('click', () => {
+                const theme = option.getAttribute('data-theme');
+                this.applyTheme(theme);
+                this.dropdown.classList.remove('active');
+            });
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('theme') === 'auto') {
+                this.applyTheme('auto');
+            }
+        });
+    }
+
+    applyTheme(theme) {
+
+        localStorage.setItem('theme', theme);
+
+        this.options.forEach(opt => {
+            if (opt.getAttribute('data-theme') === theme) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+
+        let isDark = true;
+        
+        if (theme === 'light') {
+            isDark = false;
+        } else if (theme === 'dark') {
+            isDark = true;
+        } else if (theme === 'auto') {
+
+            isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        if (isDark) {
+            this.body.classList.remove('light-mode');
+        } else {
+            this.body.classList.add('light-mode');
+        }
+    }
+}
+
 class Navigation {
     constructor() {
         this.nav = document.querySelector('.nav');
@@ -117,7 +190,6 @@ class Navigation {
     }
 }
 
-// Animation on Scroll
 class AnimationOnScroll {
     constructor() {
         this.observerOptions = {
@@ -156,7 +228,6 @@ class AnimationOnScroll {
     }
 }
 
-// Parallax Effect
 class ParallaxEffect {
     constructor() {
         this.elements = document.querySelectorAll('.hero-image, .profile-img');
@@ -179,7 +250,6 @@ class ParallaxEffect {
     }
 }
 
-// Performance Optimization
 class PerformanceOptimizer {
     constructor() {
         this.init();
@@ -208,18 +278,16 @@ class PerformanceOptimizer {
     }
 
     preloadCriticalResources() {
-        // Pré-carrega o polvo
+
         const profileImg = new Image();
         profileImg.src = 'octopus.png'; 
     }
 }
 
-// Referência única de Navigation, reutilizada pelo atalho de teclado (Escape)
 let navInstance;
 
-// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Typewriter Effect
+
     setTimeout(() => {
         const titleElement = document.querySelector('#typed-title');
         const subtitleElement = document.querySelector('#typed-subtitle');
@@ -263,14 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100);
 
-    // Componentes principais
     navInstance = new Navigation();
     new AnimationOnScroll();
     new ParallaxEffect();
     new PerformanceOptimizer();
+    
+    new ThemeManager();
 });
 
-// Add keyboard navigation support
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         navInstance?.closeMobileMenu();
@@ -289,7 +357,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Add loading animation
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
     
